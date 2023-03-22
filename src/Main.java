@@ -26,7 +26,7 @@ public class Main {
         // Получить список фамилий призывников (т.е. мужчин от 18 и до 27 лет)
         List<String> familiesСonscripts = persons.stream()
                 .filter(x -> x.getAge() >= 18)
-                .filter(x -> x.getAge() <= 27)
+                .filter(x -> x.getAge() < 27)
                 .map(x -> x.getFamily())
                 .collect(Collectors.toList());
 //        System.out.println(familiesСonscripts);
@@ -37,10 +37,7 @@ public class Main {
         Collection<Person> ablebodiedPeople = persons.stream()
                 .filter(x -> x.getEducation() == Education.values()[3])
                 .filter(x -> x.getAge() >= 18)
-                .filter(x -> {
-                    return (x.getSex() == Sex.values()[1] && x.getAge() <= 60) ||
-                           (x.getSex() == Sex.values()[0] && x.getAge() <= 65);
-                })
+                .filter(x -> x.getSex() == Sex.WOMAN && x.getAge() <= 60) || x.getSex() == Sex.MAN && x.getAge() <= 65)
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
 //        System.out.println(ablebodiedPeople);
